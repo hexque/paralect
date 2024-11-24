@@ -1,3 +1,25 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "plugins": [
+    "unused-imports"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "react/destructuring-assignment": "off",
+    "import/prefer-default-export": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-underscore-dangle": "off",
+    "arrow-body-style": [
+      "error",
+      "as-needed"
+    ],
+    "import/extensions": "off",
+    "linebreak-style": "off",
+    "@typescript-eslint/indent": "off",
+    "no-duplicate-imports": "error",
+    "unused-imports/no-unused-imports": "warn"
+  }
 }

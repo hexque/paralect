@@ -5,8 +5,16 @@
   "scripts": {
     "start": "ts-node ./src/app.ts",
     "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node ./src/app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/",
+    "prettier:write": "prettier --write src"
   },
+  "lint-staged": {
+		"src/**/*.{js,ts}": [
+			"eslint --fix",
+			"prettier --write"
+		]
+	},
   "author": "",
   "license": "ISC",
   "description": "",
@@ -19,8 +27,8 @@
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.9.0",
-    "@typescript-eslint/eslint-plugin": "^8.14.0",
-    "@typescript-eslint/parser": "^8.14.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",

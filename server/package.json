@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "ts-node ./src/app.ts",
-    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node ./src/app.ts",
+    "start": "ts-node ./src/server.ts",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node ./src/server.ts",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/",
     "prettier:write": "prettier --write src"

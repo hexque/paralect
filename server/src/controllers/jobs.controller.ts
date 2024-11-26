@@ -25,6 +25,44 @@ class JobsController {
       next(error);
     }
   };
+
+  public createVacancy = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const vacancyData: Job = req.body;
+      const createOneVacancyData: Job = await this.jobService.createVacancy(vacancyData);
+
+      res.status(200).json({ data: createOneVacancyData, message: 'сreateOne' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updateVacancy = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const vacancyId: string = req.params.id;
+      const findOneVacancyData: Job = req.body;
+
+      const updatedVacancyData: Job = await this.jobService.updateVacancyById(
+        vacancyId,
+        findOneVacancyData
+      );
+
+      res.status(200).json({ data: updatedVacancyData, message: 'updateOne' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public deleteVacancyById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const vacancyId: string = req.params.id;
+      const findOneVacancyData = await this.jobService.deleteVacancyById(vacancyId);
+
+      res.status(200).json({ data: findOneVacancyData, message: 'deleteOne' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default JobsController;

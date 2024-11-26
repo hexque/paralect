@@ -16,6 +16,9 @@ class JobsRoute implements Routes {
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.jobsController.getVacancies);
     this.router.get(`${this.path}/:id`, this.jobsController.getVacancyById);
+    this.router.post(`${this.path}`, this.jobsController.createVacancy);
+    this.router.patch(`${this.path}/:id`, this.jobsController.updateVacancy);
+    this.router.delete(`${this.path}/:id`, this.jobsController.deleteVacancyById);
   }
 }
 

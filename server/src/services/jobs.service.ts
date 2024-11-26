@@ -18,6 +18,44 @@ class JobService {
 
     return findVacancy;
   }
+
+  public async createVacancy(vacancyData: Job): Promise<Job> {
+    const { company, position, salaryFork, status, note } = vacancyData;
+
+    if (!company || !position || !salaryFork || !status) {
+      throw new HttpException(400, 'Missing required fields');
+    }
+
+    const newJob = new this.jobs({
+      company,
+      position,
+      salaryFork,
+      status,
+      note: note || ''
+    });
+
+    return newJob.save();
+  }
+
+  public async updateVacancyById(vacancyId: string, jobData: Job): Promise<Job> {
+    if (!vacancyId) throw new HttpException(400, 'VacancyId is empty');
+
+    const findVacancy = await this.jobs.findOne({ _id: vacancyId });
+
+    if (!findVacancy) throw new HttpException(404, "Job doesn't exist");
+
+    await findVacancy.updateOne(jobData);
+    return findVacancy;
+  }
+
+  public async deleteVacancyById(vacancyId: string): Promise<void> {
+    if (!vacancyId) throw new HttpException(400, 'VacancyId is empty');
+
+    const findVacancy = await this.jobs.findById(vacancyId);
+    if (!findVacancy) throw new HttpException(404, "Job doesn't exist");
+
+    await findVacancy.deleteOne();
+  }
 }
 
 export default JobService;

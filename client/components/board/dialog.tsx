@@ -11,8 +11,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from '@/components/ui/dialog';
 import {
   Select,
@@ -31,11 +30,12 @@ import { STATUSES } from '@/lib/constants';
 
 type BoardDialogProps = {
   vacancy?: any;
-  children: React.ReactNode;
+  isOpen?: boolean;
+  onClose?: () => void;
   onClick?: () => void;
 };
 
-export const BoardDialog = ({ vacancy, children }: BoardDialogProps) => {
+export const BoardDialog = ({ isOpen, onClose, vacancy }: BoardDialogProps) => {
   const form = useForm({
     mode: 'onChange',
     resolver: zodResolver(CreateVacancyResponseSchema),
@@ -55,11 +55,13 @@ export const BoardDialog = ({ vacancy, children }: BoardDialogProps) => {
     formState: { errors }
   } = form;
 
-  const onClose = () => reset();
+  const handleClose = () => {
+    reset();
+    onClose?.();
+  };
 
   return (
-    <Dialog onOpenChange={onClose}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className='sm:max-w-[450px]'>
         <DialogHeader>
           <DialogTitle>Create vacancy</DialogTitle>

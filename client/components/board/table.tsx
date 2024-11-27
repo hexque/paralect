@@ -2,7 +2,6 @@
 
 import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from '../ui/table';
 import { BoardMoreAction } from './more-action';
-import { Spinner } from '../ui/spinner';
 
 import { useVacancies } from '@/lib/queries';
 
@@ -11,9 +10,7 @@ import { Vacancy } from '@/types';
 export const BoardTable = () => {
   const { vacancies, isLoading } = useVacancies();
 
-  if (isLoading) {
-    <Spinner variant='screen' />;
-  }
+  if (isLoading) return 'Loading...';
 
   return (
     <Table>

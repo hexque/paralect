@@ -11,11 +11,11 @@
     "prettier:write": "prettier --write src"
   },
   "lint-staged": {
-		"src/**/*.{js,ts}": [
-			"eslint --fix",
-			"prettier --write"
-		]
-	},
+    "src/**/*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "author": "",
   "license": "ISC",
   "description": "",

@@ -9,25 +9,33 @@ import {
   AlertDialogTitle
 } from '@/components/ui/alert-dialog';
 
+import { useDelete } from '@/lib/queries';
+
 type BoardAlertDialogProps = {
-  isOpen?: boolean;
-  onClose?: () => void;
-  onConfirm?: () => void;
+  id: string;
+  isOpen: boolean;
+  onClose: () => void;
 };
 
-export const BoardAlertDialog = ({ isOpen, onClose, onConfirm }: BoardAlertDialogProps) => (
-  <AlertDialog open={isOpen} onOpenChange={onClose}>
-    <AlertDialogContent>
-      <AlertDialogHeader>
-        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-        <AlertDialogDescription>
-          This action cannot be undone. This will permanently remove your data from our servers.
-        </AlertDialogDescription>
-      </AlertDialogHeader>
-      <AlertDialogFooter>
-        <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction onClick={onConfirm}>Continue</AlertDialogAction>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog>
-);
+export const BoardAlertDialog = ({ id, isOpen, onClose }: BoardAlertDialogProps) => {
+  const { mutationDelete } = useDelete();
+
+  const handleDelete = () => mutationDelete.mutateAsync(id);
+
+  return (
+    <AlertDialog open={isOpen} onOpenChange={onClose}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};

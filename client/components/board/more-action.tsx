@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from 'react';
+'use client';
 
 import { TableCell } from '../ui/table';
 import {
@@ -13,23 +12,27 @@ import {
 import { Button } from '../ui/button';
 import { Icons } from '../ui/icons';
 import { BoardAlertDialog } from './alert-dialog';
-import { BoardDialog } from './dialog';
+import { EditBoardForm } from './form';
 
-export const BoardMoreAction = () => {
-  const [dialog, setDialog] = useState({ dialog: false, alertDialog: false });
+import { useVacancy } from '@/lib/queries';
+
+import { useModalManager } from '@/hooks/use-modal';
+
+type BoardMoreActionProps = {
+  id: string;
+};
+
+export const BoardMoreAction = ({ id }: BoardMoreActionProps) => {
+  const { vacancy } = useVacancy(id);
+
+  const { isOpenModals, hideModal, showModal } = useModalManager();
+
+  const handleClose = (modalName: string) => hideModal(modalName);
 
   const actions = [
-    { label: 'Update', onClick: () => handleDialogToggle('dialog') },
-    { label: 'Delete', onClick: () => handleDialogToggle('alertDialog') }
+    { label: 'Update', onClick: () => showModal('dialog') },
+    { label: 'Delete', onClick: () => showModal('alertDialog') }
   ];
-
-  const handleDialogToggle = (dialogName: string) => {
-    setDialog((prev) => ({ ...prev, [dialogName]: !prev[dialogName] }));
-  };
-
-  const handleCloseDialog = (dialogName: string) => {
-    setDialog((prev) => ({ ...prev, [dialogName]: false }));
-  };
 
   return (
     <TableCell className='text-center'>
@@ -52,10 +55,16 @@ export const BoardMoreAction = () => {
         </DropdownMenuContent>
       </DropdownMenu>
       <BoardAlertDialog
-        isOpen={dialog.alertDialog}
-        onClose={() => handleCloseDialog('alertDialog')}
+        id={id}
+        isOpen={isOpenModals.includes('alertDialog')}
+        onClose={() => handleClose('alertDialog')}
       />
-      <BoardDialog isOpen={dialog.dialog} onClose={() => handleCloseDialog('dialog')} />
+      <EditBoardForm
+        id={id}
+        vacancy={vacancy?.data?.data}
+        isOpen={isOpenModals.includes('dialog')}
+        onClose={() => handleClose('dialog')}
+      />
     </TableCell>
   );
 };

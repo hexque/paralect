@@ -32,7 +32,7 @@ export const BoardTable = () => {
             <TableCell className='font-medium'>{vacancy.salaryFork}</TableCell>
             <TableCell>{vacancy.status}</TableCell>
             <TableCell>{vacancy.note}</TableCell>
-            <BoardMoreAction />
+            <BoardMoreAction id={vacancy._id} />
           </TableRow>
         ))}
       </TableBody>

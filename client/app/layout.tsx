@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Toaster } from 'sonner';
 
 import { QueryProvider } from '@/components/providers/query-provider';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -33,6 +34,7 @@ export default function RootLayout({
         <QueryProvider>
           <ReactQueryDevtools />
           {children}
+          <Toaster />
         </QueryProvider>
       </body>
     </html>

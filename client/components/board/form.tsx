@@ -143,7 +143,7 @@ export const Form = ({
 };
 
 export const CreateBoardForm = ({ children }: { children: React.ReactNode }) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutationCreate } = useCreate();
 
   const handleSubmit = async (formData: any) => {

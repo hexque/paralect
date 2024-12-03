@@ -6,12 +6,12 @@ import { BoardTable } from './table';
 export function Board() {
   return (
     <div>
-      <div>
+      <div className='mb-4 flex items-center justify-between'>
         <h3>Welcome!</h3>
         <CreateBoardForm>
           <Button variant='outline'>
             <Icons.plus />
-            Add feedback
+            Add response
           </Button>
         </CreateBoardForm>
       </div>

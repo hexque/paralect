@@ -4,5 +4,8 @@
 .pnp.*
 .yarn/*
 
+# production
+/dist
+
 # env files (can opt-in for commiting if needed)
 .env*

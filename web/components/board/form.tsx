@@ -175,6 +175,7 @@ export const EditBoardForm = ({
   const handleSubmit = async (formData: any) => {
     try {
       await mutationUpdate.mutateAsync(formData);
+      onClose();
     } catch (error) {
       console.error(error);
     }
@@ -197,7 +198,7 @@ export const EditBoardForm = ({
               position: vacancy?.position,
               salaryFork: vacancy?.salaryFork,
               status: vacancy?.status,
-              note: vacancy?.note || ''
+              note: vacancy?.note
             }
           }}
           onSubmit={handleSubmit}

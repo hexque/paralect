@@ -87,16 +87,17 @@ export const Form = ({
     <FormProvider {...form}>
       <form className='grid gap-4 py-4' onSubmit={handleSubmit(onSubmit)}>
         <div className='grid items-center gap-3'>
-          <InputControl control={control} name='company' />
+          <InputControl control={control} label='Company' name='company' />
         </div>
         <div className='grid items-center gap-3'>
-          <InputControl control={control} name='position' />
+          <InputControl control={control} label='Position' name='position' />
         </div>
         <div className='grid items-center gap-3'>
-          <InputControl control={control} name='salaryFork' />
+          <InputControl control={control} label='Salary fork' name='salaryFork' />
         </div>
         <div className='grid items-center gap-3'>
           <SelectControl
+            label='Status'
             control={control}
             name='status'
             options={STATUSES}
@@ -104,7 +105,7 @@ export const Form = ({
           />
         </div>
         <div className='grid items-center gap-3'>
-          <TextareaControl control={control} name='note' />
+          <TextareaControl control={control} label='Note' name='note' />
         </div>
         {children}
       </form>

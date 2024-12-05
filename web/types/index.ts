@@ -3,6 +3,6 @@ export type Vacancy = {
   company: string;
   position: string;
   salaryFork: string;
-  status: string;
+  status: 'Applied' | 'Invitation' | 'Rejected' | 'Archived';
   note?: string;
 };

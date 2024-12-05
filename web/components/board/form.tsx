@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
@@ -16,19 +15,11 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Icons } from '../ui/icons';
 import { Button } from '../ui/button';
+import { InputControl } from '../shared/form/input';
+import { TextareaControl } from '../shared/form/textarea';
+import { SelectControl } from '../shared/form/select';
 
 import { STATUSES } from '@/lib/constants';
 import { useCreate, useUpdate } from '@/lib/queries';
@@ -69,10 +60,10 @@ export const CreateVacancyResponseSchema = z.object({
     }),
   status: z
     .enum(['Applied', 'Invitation', 'Rejected', 'Archived'], {
-      required_error: 'Please select a status to display.'
+      required_error: 'Please choose one of the following statuses'
     })
     .refine((value: string) => value !== undefined, {
-      message: 'Please select a status.'
+      message: 'Please choose one of the following statuses'
     }),
   note: z.string().trim().optional()
 });
@@ -88,57 +79,36 @@ export const Form = ({
   onSubmit: (data: FormData) => Promise<void>;
   children: React.ReactNode;
 }) => {
-  const {
-    setValue,
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormData>(props);
+  const form = useForm<FormData>(props);
+
+  const { control, handleSubmit } = form;
 
   return (
-    <form className='grid gap-4 py-4' onSubmit={handleSubmit(onSubmit)}>
-      <div className='grid items-center gap-2'>
-        <Label htmlFor='company'>Company</Label>
-        <Input id='company' className='col-span-3' {...register('company')} />
-        {errors?.company && <p className='px-1 text-xs text-red-600'>{errors.company.message}</p>}
-      </div>
-      <div className='grid items-center gap-2'>
-        <Label htmlFor='position'>Position</Label>
-        <Input id='position' className='col-span-3' {...register('position')} />
-        {errors?.position && <p className='px-1 text-xs text-red-600'>{errors.position.message}</p>}
-      </div>
-      <div className='grid items-center gap-2'>
-        <Label htmlFor='salaryFork'>Salary fork</Label>
-        <Input id='salaryFork' className='col-span-3' {...register('salaryFork')} />
-        {errors?.salaryFork && (
-          <p className='px-1 text-xs text-red-600'>{errors.salaryFork.message}</p>
-        )}
-      </div>
-      <div className='grid items-center gap-2'>
-        <Label htmlFor='status'>Status</Label>
-        <Select {...register('status')} onValueChange={(value) => setValue('status', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder='Select vacancy status' />
-          </SelectTrigger>
-          <SelectContent>
-            {STATUSES.map((status: string) => (
-              <SelectGroup key={status}>
-                <SelectItem id='status' value={status}>
-                  {status}
-                </SelectItem>
-              </SelectGroup>
-            ))}
-          </SelectContent>
-        </Select>
-        {errors?.status && <p className='px-1 text-xs text-red-600'>{errors.status.message}</p>}
-      </div>
-      <div className='grid items-center gap-2'>
-        <Label htmlFor='note'>Note</Label>
-        <Textarea id='note' className='col-span-3' {...register('note')} />
-        {errors?.note && <p className='px-1 text-xs text-red-600'>{errors.note.message}</p>}
-      </div>
-      {children}
-    </form>
+    <FormProvider {...form}>
+      <form className='grid gap-4 py-4' onSubmit={handleSubmit(onSubmit)}>
+        <div className='grid items-center gap-3'>
+          <InputControl control={control} name='company' />
+        </div>
+        <div className='grid items-center gap-3'>
+          <InputControl control={control} name='position' />
+        </div>
+        <div className='grid items-center gap-3'>
+          <InputControl control={control} name='salaryFork' />
+        </div>
+        <div className='grid items-center gap-3'>
+          <SelectControl
+            control={control}
+            name='status'
+            options={STATUSES}
+            placeholder='Select the response status'
+          />
+        </div>
+        <div className='grid items-center gap-3'>
+          <TextareaControl control={control} name='note' />
+        </div>
+        {children}
+      </form>
+    </FormProvider>
   );
 };
 

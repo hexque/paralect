@@ -79,7 +79,7 @@ export const Form = ({
   onSubmit: (data: FormData) => Promise<void>;
   children: React.ReactNode;
 }) => {
-  const form = useForm<FormData>(props);
+  const form = useForm<FormData>({ ...props, mode: 'onChange' });
 
   const { control, handleSubmit } = form;
 

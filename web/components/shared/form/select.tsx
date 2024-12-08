@@ -54,7 +54,7 @@ export const SelectControl = <T extends FieldValues>({
     name={name}
     render={({ field }) => (
       <FormItem className={cn(classNames?.item)}>
-        {label && <FormLabel className={cn(classNames?.label)}>{label}</FormLabel>}
+        {label && <FormLabel className={cn(classNames?.label, 'text-current')}>{label}</FormLabel>}
         <FormControl>
           <Select
             {...field}

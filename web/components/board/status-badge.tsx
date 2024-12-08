@@ -13,9 +13,9 @@ export const StatusBadge = ({ status }: TableCellStatusProps) => {
   const { circle, text } = STATUS_COLOR[status];
 
   return (
-    <Badge variant='secondary' className='flex items-center rounded-lg py-2'>
-      <div className={cn('mr-2 h-2 w-2 rounded-full', circle)} />
-      <span className={text}>{status}</span>
+    <Badge variant='secondary' className='flex w-[5.5rem] items-center rounded-lg py-2'>
+      <div className={cn('mr-2 h-1.5 w-1.5 rounded-full', circle)} />
+      <span className={cn('font-medium', text)}>{status}</span>
     </Badge>
   );
 };

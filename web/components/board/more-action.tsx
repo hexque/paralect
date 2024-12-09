@@ -54,17 +54,21 @@ export const BoardMoreAction = ({ id }: BoardMoreActionProps) => {
           <DropdownMenuItem>Undo</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <BoardAlertDialog
-        id={id}
-        isOpen={isOpenModals.includes('alertDialog')}
-        onClose={() => handleClose('alertDialog')}
-      />
-      <EditBoardForm
-        id={id}
-        vacancy={vacancy?.data?.data}
-        isOpen={isOpenModals.includes('dialog')}
-        onClose={() => handleClose('dialog')}
-      />
+      {vacancy && (
+        <>
+          <BoardAlertDialog
+            id={id}
+            isOpen={isOpenModals.includes('alertDialog')}
+            onClose={() => handleClose('alertDialog')}
+          />
+          <EditBoardForm
+            id={id}
+            vacancy={vacancy?.data?.data}
+            isOpen={isOpenModals.includes('dialog')}
+            onClose={() => handleClose('dialog')}
+          />
+        </>
+      )}
     </TableCell>
   );
 };

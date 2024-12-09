@@ -45,9 +45,11 @@ export const BoardTable = ({ vacancies }: BoardTableProps) => {
             </TableRow>
           ))
         ) : (
-          <TableCell colSpan={6} className='h-96 text-center'>
-            <TableNotFound />
-          </TableCell>
+          <TableRow>
+            <TableCell colSpan={6} className='h-96 text-center'>
+              <TableNotFound />
+            </TableCell>
+          </TableRow>
         )}
       </TableBody>
     </Table>

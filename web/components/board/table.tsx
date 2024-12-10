@@ -41,7 +41,7 @@ export const BoardTable = ({ vacancies }: BoardTableProps) => {
                 <StatusBadge status={status} />
               </TableCell>
               <TableCell>{note}</TableCell>
-              <BoardMoreAction id={selectedId} />
+              <BoardMoreAction id={selectedId} onRowSelect={handleRowClick} />
             </TableRow>
           ))
         ) : (

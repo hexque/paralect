@@ -20,9 +20,10 @@ import { useModalManager } from '@/hooks/use-modal';
 
 type BoardMoreActionProps = {
   id: string;
+  onRowSelect: (id: string) => void;
 };
 
-export const BoardMoreAction = ({ id }: BoardMoreActionProps) => {
+export const BoardMoreAction = ({ id, onRowSelect }: BoardMoreActionProps) => {
   const { vacancy } = useVacancy(id);
 
   const { isOpenModals, hideModal, showModal } = useModalManager();
@@ -38,7 +39,7 @@ export const BoardMoreAction = ({ id }: BoardMoreActionProps) => {
     <TableCell className='text-center'>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant='link' size='icon'>
+          <Button variant='link' size='icon' onClick={() => onRowSelect(id)}>
             <Icons.more />
           </Button>
         </DropdownMenuTrigger>

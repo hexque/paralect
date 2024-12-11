@@ -3,7 +3,7 @@ import JobsController from '../controllers/jobs.controller';
 import { Routes } from '../interfaces/routes.interface';
 
 class JobsRoute implements Routes {
-  public path = '/vacancy';
+  public path = '/vacancies';
 
   public router = Router();
 
@@ -14,11 +14,11 @@ class JobsRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.jobsController.getVacancies);
+    this.router.get(`${this.path}`, this.jobsController.getAllVacancies);
     this.router.get(`${this.path}/:id`, this.jobsController.getVacancyById);
     this.router.post(`${this.path}`, this.jobsController.createVacancy);
     this.router.patch(`${this.path}/:id`, this.jobsController.updateVacancy);
-    this.router.delete(`${this.path}/:id`, this.jobsController.deleteVacancyById);
+    this.router.delete(`${this.path}/:id`, this.jobsController.deleteVacancy);
   }
 }
 

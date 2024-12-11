@@ -5,7 +5,7 @@ import JobService from '../services/jobs.service';
 class JobsController {
   public jobService = new JobService();
 
-  public getVacancies = async (_, res: Response, next: NextFunction) => {
+  public getAllVacancies = async (_, res: Response, next: NextFunction) => {
     try {
       const findAllVacanciesData: Job[] = await this.jobService.findAllVacancies();
 
@@ -42,7 +42,7 @@ class JobsController {
       const vacancyId: string = req.params.id;
       const findOneVacancyData: Job = req.body;
 
-      const updatedVacancyData: Job = await this.jobService.updateVacancyById(
+      const updatedVacancyData: Job = await this.jobService.updateVacancy(
         vacancyId,
         findOneVacancyData
       );
@@ -53,10 +53,10 @@ class JobsController {
     }
   };
 
-  public deleteVacancyById = async (req: Request, res: Response, next: NextFunction) => {
+  public deleteVacancy = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const vacancyId: string = req.params.id;
-      const findOneVacancyData = await this.jobService.deleteVacancyById(vacancyId);
+      const findOneVacancyData = await this.jobService.deleteVacancy(vacancyId);
 
       res.status(200).json({ data: findOneVacancyData, message: 'deleteOne' });
     } catch (error) {

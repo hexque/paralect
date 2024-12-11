@@ -37,7 +37,7 @@ class JobService {
     return newJob.save();
   }
 
-  public async updateVacancyById(vacancyId: string, jobData: Job): Promise<Job> {
+  public async updateVacancy(vacancyId: string, jobData: Job): Promise<Job> {
     if (!vacancyId) throw new HttpException(400, 'VacancyId is empty');
 
     const findVacancy = await this.jobs.findOne({ _id: vacancyId });
@@ -48,7 +48,7 @@ class JobService {
     return findVacancy;
   }
 
-  public async deleteVacancyById(vacancyId: string): Promise<void> {
+  public async deleteVacancy(vacancyId: string): Promise<void> {
     if (!vacancyId) throw new HttpException(400, 'VacancyId is empty');
 
     const findVacancy = await this.jobs.findById(vacancyId);

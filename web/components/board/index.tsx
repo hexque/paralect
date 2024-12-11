@@ -7,13 +7,10 @@ import { BoardTable } from './table';
 import { Spinner } from '../shared/spinner';
 
 import { useVacancies } from '@/lib/queries';
-
 export function Board() {
   const { vacancies, isLoading } = useVacancies();
 
   if (isLoading) return <Spinner variant='screen' />;
-
-  const allVacancies = vacancies?.data?.data;
 
   return (
     <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 sm:p-20'>
@@ -26,7 +23,7 @@ export function Board() {
             </Button>
           </CreateBoardForm>
         </div>
-        <BoardTable vacancies={allVacancies} />
+        <BoardTable vacancies={vacancies} />
       </div>
     </div>
   );

@@ -64,7 +64,7 @@ export const BoardMoreAction = ({ id, onRowSelect }: BoardMoreActionProps) => {
           />
           <EditBoardForm
             id={id}
-            vacancy={vacancy?.data?.data}
+            vacancy={vacancy}
             isOpen={isOpenModals.includes('dialog')}
             onClose={() => handleClose('dialog')}
           />

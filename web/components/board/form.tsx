@@ -85,17 +85,17 @@ export const Form = ({
 
   return (
     <FormProvider {...form}>
-      <form className='grid gap-4 py-4' onSubmit={handleSubmit(onSubmit)}>
-        <div className='grid items-center gap-3'>
+      <form className='grid gap-2' onSubmit={handleSubmit(onSubmit)}>
+        <div className='grid items-center'>
           <InputControl control={control} label='Company' name='company' />
         </div>
-        <div className='grid items-center gap-3'>
+        <div className='grid items-center'>
           <InputControl control={control} label='Position' name='position' />
         </div>
-        <div className='grid items-center gap-3'>
+        <div className='grid items-center'>
           <InputControl control={control} label='Salary fork' name='salaryFork' />
         </div>
-        <div className='grid items-center gap-3'>
+        <div className='grid items-center'>
           <SelectControl
             label='Status'
             control={control}
@@ -104,7 +104,7 @@ export const Form = ({
             placeholder='Select the response status'
           />
         </div>
-        <div className='grid items-center gap-3'>
+        <div className='grid items-center'>
           <TextareaControl control={control} label='Note' name='note' />
         </div>
         {children}
@@ -131,9 +131,9 @@ export const CreateBoardForm = ({ children }: { children: React.ReactNode }) => 
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create a new response</DialogTitle>
+          <DialogTitle>Create new response</DialogTitle>
           <DialogDescription>
-            Create to your vacancy here. Click save when you&apos;re done.
+            Use this form to log and track your response to any job opportunity
           </DialogDescription>
         </DialogHeader>
         <Form
@@ -143,9 +143,12 @@ export const CreateBoardForm = ({ children }: { children: React.ReactNode }) => 
           onSubmit={handleSubmit}
         >
           <DialogFooter>
+            <Button variant='secondary' type='button' onClick={() => setIsModalOpen(false)}>
+              Cancel
+            </Button>
             <Button disabled={mutationCreate.isPending} type='submit'>
               {mutationCreate.isPending ? (
-                <div className='flex items-center gap-2'>
+                <div className='ml-2 flex items-center gap-2'>
                   <Icons.spinner className='size-4 animate-spin' />
                   <span>Loading...</span>
                 </div>
@@ -186,10 +189,8 @@ export const EditBoardForm = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit the response</DialogTitle>
-          <DialogDescription>
-            Edit to your vacancy here. Click save when you&apos;re done.
-          </DialogDescription>
+          <DialogTitle>Edit response</DialogTitle>
+          <DialogDescription>Make any necessary changes to your response</DialogDescription>
         </DialogHeader>
         <Form
           props={{
@@ -205,6 +206,9 @@ export const EditBoardForm = ({
           onSubmit={handleSubmit}
         >
           <DialogFooter>
+            <Button variant='secondary' type='button' onClick={onClose}>
+              Cancel
+            </Button>
             <Button disabled={mutationUpdate.isPending} type='submit'>
               {mutationUpdate.isPending ? (
                 <div className='flex items-center gap-2'>
@@ -212,7 +216,7 @@ export const EditBoardForm = ({
                   <span>Loading...</span>
                 </div>
               ) : (
-                'Save'
+                'Save changes'
               )}
             </Button>
           </DialogFooter>

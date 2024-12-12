@@ -29,6 +29,8 @@ interface InputProps<T extends FieldValues> {
     description?: string;
     message?: string;
   };
+  startAddOn?: string;
+  endAddOn?: string;
 }
 
 export const InputControl = <T extends FieldValues>({
@@ -38,7 +40,9 @@ export const InputControl = <T extends FieldValues>({
   description,
   isDisabled,
   label,
-  placeholder
+  placeholder,
+  startAddOn,
+  endAddOn
 }: InputProps<T>) => (
   <FormField
     control={control}
@@ -47,12 +51,21 @@ export const InputControl = <T extends FieldValues>({
       <FormItem className={cn(classNames?.item)}>
         {label && <FormLabel className={cn(classNames?.label, 'text-current')}>{label}</FormLabel>}
         <FormControl>
-          <Input
-            disabled={isDisabled}
-            placeholder={placeholder}
-            className={cn(classNames?.input)}
-            {...field}
-          />
+          <div className='relative'>
+            <Input
+              type='text'
+              disabled={isDisabled}
+              placeholder={placeholder}
+              className={cn(classNames?.input)}
+              {...field}
+            />
+            <span className='pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-sm text-muted-foreground peer-disabled:opacity-50'>
+              {startAddOn}
+            </span>
+            <span className='pointer-events-none absolute inset-y-0 end-0 flex items-center justify-center pe-3 text-sm text-muted-foreground peer-disabled:opacity-50'>
+              {endAddOn}
+            </span>
+          </div>
         </FormControl>
         {description && <FormDescription className={cn(classNames?.description)} />}
         <FormMessage className={cn(classNames?.message)} />

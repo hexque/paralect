@@ -23,6 +23,7 @@ import { SelectControl } from '../shared/form/select';
 
 import { STATUSES } from '@/lib/constants';
 import { useCreate, useUpdate } from '@/lib/queries';
+import { isValidRange } from '@/lib/utils';
 
 export const CreateVacancyResponseSchema = z.object({
   company: z
@@ -57,6 +58,12 @@ export const CreateVacancyResponseSchema = z.object({
     .trim()
     .min(1, {
       message: 'Salary fork is required'
+    })
+    .refine((value) => /^(\d+|\d+-\d+)$/.test(value), {
+      message: 'Invalid salary fork format. Should be a number or a range (e.g., 100-200).'
+    })
+    .refine((value) => isValidRange(value), {
+      message: 'The range must be written in ascending order (e.g., 500-700).'
     }),
   status: z
     .enum(['Applied', 'Invitation', 'Rejected', 'Archived'], {
@@ -85,7 +92,7 @@ export const Form = ({
 
   return (
     <FormProvider {...form}>
-      <form className='grid gap-2' onSubmit={handleSubmit(onSubmit)}>
+      <form className='mt-5 grid gap-2' onSubmit={handleSubmit(onSubmit)}>
         <div className='grid items-center'>
           <InputControl control={control} label='Company' name='company' />
         </div>
@@ -93,7 +100,15 @@ export const Form = ({
           <InputControl control={control} label='Position' name='position' />
         </div>
         <div className='grid items-center'>
-          <InputControl control={control} label='Salary fork' name='salaryFork' />
+          <InputControl
+            control={control}
+            label='Salary fork'
+            name='salaryFork'
+            classNames={{ input: 'peer pe-12 ps-6' }}
+            startAddOn='$'
+            endAddOn='USD'
+            placeholder='100-200'
+          />
         </div>
         <div className='grid items-center'>
           <SelectControl
@@ -115,6 +130,7 @@ export const Form = ({
 
 export const CreateBoardForm = ({ children }: { children: React.ReactNode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { mutationCreate } = useCreate();
 
   const handleSubmit = async (formData: any) => {
@@ -129,7 +145,7 @@ export const CreateBoardForm = ({ children }: { children: React.ReactNode }) => 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent>
+      <DialogContent className='w-full max-w-[30rem]'>
         <DialogHeader>
           <DialogTitle>Create new response</DialogTitle>
           <DialogDescription>
@@ -142,7 +158,7 @@ export const CreateBoardForm = ({ children }: { children: React.ReactNode }) => 
           }}
           onSubmit={handleSubmit}
         >
-          <DialogFooter>
+          <DialogFooter className='mt-5'>
             <Button variant='secondary' type='button' onClick={() => setIsModalOpen(false)}>
               Cancel
             </Button>
@@ -187,7 +203,7 @@ export const EditBoardForm = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className='w-full max-w-[30rem]'>
         <DialogHeader>
           <DialogTitle>Edit response</DialogTitle>
           <DialogDescription>Make any necessary changes to your response</DialogDescription>
@@ -205,7 +221,7 @@ export const EditBoardForm = ({
           }}
           onSubmit={handleSubmit}
         >
-          <DialogFooter>
+          <DialogFooter className='mt-5'>
             <Button variant='secondary' type='button' onClick={onClose}>
               Cancel
             </Button>

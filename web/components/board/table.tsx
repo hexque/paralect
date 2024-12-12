@@ -36,7 +36,7 @@ export const BoardTable = ({ vacancies }: BoardTableProps) => {
             <TableRow key={_id} onClick={() => handleRowClick(_id)}>
               <TableCell>{company}</TableCell>
               <TableCell>{position}</TableCell>
-              <TableCell>{salaryFork}</TableCell>
+              <TableCell>${salaryFork}</TableCell>
               <TableCell>
                 <StatusBadge status={status} />
               </TableCell>

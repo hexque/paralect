@@ -1,7 +1,8 @@
+import 'tsconfig-paths/register';
 import express from 'express';
 import cors from 'cors';
 import { connect } from 'mongoose';
-import { Routes } from './interfaces/routes.interface';
+import { Routes } from '@/interfaces/routes.interface';
 import errorMiddleware from './lib/middlewares/error.middleware';
 import config from './config';
 

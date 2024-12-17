@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import JobsController from '../controllers/jobs.controller';
-import { Routes } from '../interfaces/routes.interface';
+import JobsController from '@/controllers/jobs.controller';
+import { Routes } from '@/interfaces/routes.interface';
 
 class JobsRoute implements Routes {
   public path = '/vacancies';
 
-  public router = Router();
+  public router: Router = Router();
 
   public jobsController = new JobsController();
 

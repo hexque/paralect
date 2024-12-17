@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { Job } from '../interfaces/jobs.interface';
-import JobService from '../services/jobs.service';
+import { Job } from '@/interfaces/jobs.interface';
+import JobService from '@/services/jobs.service';
 
 class JobsController {
   public jobService = new JobService();

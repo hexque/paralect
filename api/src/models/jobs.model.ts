@@ -1,5 +1,5 @@
 import { model, Schema, Document } from 'mongoose';
-import { Job } from '../interfaces/jobs.interface';
+import { Job } from '@/interfaces/jobs.interface';
 
 const jobSchema: Schema = new Schema({
   company: {

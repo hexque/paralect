@@ -1,6 +1,6 @@
-import { HttpException } from '../lib/exceptions/HttpException';
-import { Job } from '../interfaces/jobs.interface';
-import jobModel from '../models/jobs.model';
+import { HttpException } from '@/lib/exceptions/HttpException';
+import { Job } from '@/interfaces/jobs.interface';
+import jobModel from '@/models/jobs.model';
 
 class JobService {
   public jobs = jobModel;

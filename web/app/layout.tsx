@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Outfit } from 'next/font/google';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'sonner';
@@ -9,6 +9,12 @@ import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Job board'
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  userScalable: false
 };
 
 const outfit = Outfit({ subsets: ['latin'] });

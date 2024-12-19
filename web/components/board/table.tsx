@@ -19,15 +19,15 @@ export const BoardTable = ({ vacancies }: BoardTableProps) => {
   const handleRowClick = (id: string) => setSelectedId(id);
 
   return (
-    <Table className='w-[60rem] table-auto'>
+    <Table className='table-auto overflow-x-auto max-sm:text-xs'>
       <TableHeader>
         <TableRow>
-          <TableHead className='w-[8rem] py-1'>Company</TableHead>
-          <TableHead className='w-[15rem] py-1'>Position</TableHead>
-          <TableHead className='w-[8rem] py-1'>Salary fork</TableHead>
-          <TableHead className='w-[4rem] py-1'>Status</TableHead>
-          <TableHead className='w-[20rem] py-1'>Note</TableHead>
-          <TableHead className='w-[4rem] py-1'>Actions</TableHead>
+          <TableHead className='min-w-[5rem] py-1'>Company</TableHead>
+          <TableHead className='min-w-[10rem] py-1'>Position</TableHead>
+          <TableHead className='min-w-[6rem] py-1'>Salary</TableHead>
+          <TableHead className='min-w-[6rem] py-1'>Status</TableHead>
+          <TableHead className='min-w-[20rem] py-1'>Note</TableHead>
+          <TableHead className='min-w-[3rem] py-1'>Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className='min-h-96'>

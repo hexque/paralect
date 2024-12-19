@@ -24,19 +24,23 @@ export function Board() {
   );
 
   return (
-    <div className='flex justify-center p-20'>
-      <div className='row-start-2 flex flex-col items-center gap-8 rounded-lg border-2 border-zinc-900 bg-zinc-900 p-4 sm:items-start'>
-        <div className='mb-4 flex w-full items-center justify-between'>
-          <h3>All vacancy responses</h3>
-          <div className='flex'>
-            <BoardSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-            <CreateBoardForm>
-              <Button variant='outline' size='icon'>
-                <Icons.plus />
-              </Button>
-            </CreateBoardForm>
-          </div>
+    <div className='flex flex-col justify-center px-36 py-20 max-xl:p-10 max-lg:p-8 max-md:p-8 max-sm:p-2'>
+      <div className='mb-4 flex items-center justify-between rounded-md bg-zinc-900 px-4 py-3 max-sm:flex-col max-sm:items-start'>
+        <h3 className='max-sm:mb-3 max-sm:hidden'>JooBoard</h3>
+        <div className='flex max-sm:w-full max-sm:justify-between'>
+          <BoardSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          <CreateBoardForm>
+            <Button
+              size='icon'
+              variant='link'
+              className='border-x border-y hover:border-yellow-700'
+            >
+              <Icons.plus />
+            </Button>
+          </CreateBoardForm>
         </div>
+      </div>
+      <div className='rounded-md bg-zinc-900 px-4 py-6'>
         <BoardTable vacancies={foundVacancies} />
       </div>
     </div>

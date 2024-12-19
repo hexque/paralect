@@ -22,7 +22,7 @@ export const BoardSearch = ({ searchQuery, setSearchQuery }: BoardSearchProps) =
     <div className='mr-3 space-y-2'>
       <div className='relative'>
         <Input
-          className='peer pe-9 ps-9'
+          className='peer pe-9 ps-9 max-md:text-xs'
           placeholder='Search by company...'
           type='text'
           ref={inputRef}

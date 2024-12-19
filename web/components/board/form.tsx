@@ -162,7 +162,7 @@ export const CreateBoardForm = ({ children }: { children: React.ReactNode }) => 
             <Button variant='secondary' type='button' onClick={() => setIsModalOpen(false)}>
               Cancel
             </Button>
-            <Button disabled={mutationCreate.isPending} type='submit'>
+            <Button disabled={mutationCreate.isPending} type='submit' className='max-sm:mb-3'>
               {mutationCreate.isPending ? (
                 <div className='ml-2 flex items-center gap-2'>
                   <Icons.spinner className='size-4 animate-spin' />
@@ -225,7 +225,7 @@ export const EditBoardForm = ({
             <Button variant='secondary' type='button' onClick={onClose}>
               Cancel
             </Button>
-            <Button disabled={mutationUpdate.isPending} type='submit'>
+            <Button disabled={mutationUpdate.isPending} type='submit' className='max-sm:mb-3'>
               {mutationUpdate.isPending ? (
                 <div className='flex items-center gap-2'>
                   <Icons.spinner className='size-4 animate-spin' />

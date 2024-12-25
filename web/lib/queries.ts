@@ -2,9 +2,6 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import api from './api';
-import { ROUTE_PATH } from './constants';
-
-import { Vacancy } from '@/types';
 
 export const useVacancies = () => {
   const {
@@ -16,7 +13,7 @@ export const useVacancies = () => {
     retry: 1,
     refetchOnWindowFocus: true,
     queryFn: async () => {
-      const { data } = await api.get(ROUTE_PATH.VACANCIES);
+      const { data } = await api.get('/vacancies');
       return data;
     },
     select: (data) => data?.data
@@ -35,7 +32,7 @@ export const useVacancy = (id: string) => {
     retry: 1,
     enabled: !!id,
     queryFn: async () => {
-      const { data } = await api.get(ROUTE_PATH.VACANCIES + `/${id}`);
+      const { data } = await api.get('/vacancies' + `/${id}`);
       return data;
     },
     select: (data) => data?.data
@@ -49,7 +46,7 @@ export const useCreate = () => {
 
   const mutationCreate = useMutation({
     mutationKey: ['add-vacancy'],
-    mutationFn: async (formData: Vacancy) => await api.post(ROUTE_PATH.VACANCIES, formData),
+    mutationFn: async (formData: FormData) => await api.post('/vacancies', formData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['search-vacancies'] });
       toast.success('The response to the vacancy was successfully added');
@@ -67,10 +64,10 @@ export const useUpdate = (id: string) => {
 
   const mutationUpdate = useMutation({
     mutationKey: ['update-vacancy', id],
-    mutationFn: async (formData: Vacancy) =>
-      await api.patch(ROUTE_PATH.VACANCIES + `/${id}`, formData),
+    mutationFn: async (formData: FormData) => await api.patch('/vacancies' + `/${id}`, formData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['search-vacancies'] });
+      toast.success('The response to the vacancy was successfully updated');
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -85,7 +82,7 @@ export const useDelete = () => {
 
   const mutationDelete = useMutation({
     mutationKey: ['delete-vacancy'],
-    mutationFn: async (id: string) => await api.delete(ROUTE_PATH.VACANCIES + `/${id}`),
+    mutationFn: async (id: string) => await api.delete('/vacancies' + `/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['search-vacancies'] });
       toast.success('The response to the vacancy has been successfully deleted');

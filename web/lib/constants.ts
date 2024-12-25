@@ -6,7 +6,3 @@ export const STATUS_COLOR = {
   Rejected: { circle: 'bg-red-600', text: 'text-red-600' },
   Archived: { circle: 'bg-gray-400', text: 'text-gray-400' }
 };
-
-export enum ROUTE_PATH {
-  VACANCIES = '/vacancies'
-}

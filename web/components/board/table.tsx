@@ -27,7 +27,7 @@ export const BoardTable = ({ vacancies }: BoardTableProps) => {
           <TableHead className='min-w-[6rem] py-1'>Salary</TableHead>
           <TableHead className='min-w-[6rem] py-1'>Status</TableHead>
           <TableHead className='min-w-[20rem] py-1'>Note</TableHead>
-          <TableHead className='min-w-[3rem] py-1'>Actions</TableHead>
+          <TableHead className='min-w-[3rem] py-1 text-center'>Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className='min-h-96'>

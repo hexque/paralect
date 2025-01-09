@@ -17,7 +17,7 @@ export function Board() {
 
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  if (isLoading) return <Spinner variant='screen' />;
+  if (isLoading) return <Spinner variant='screen' spinnerClassNames='w-14 h-14' />;
 
   const foundVacancies = vacancies.filter((vacancy: Vacancy) =>
     vacancy.company.toLowerCase().includes(searchQuery.toLowerCase())

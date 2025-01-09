@@ -7,7 +7,10 @@ import {
   MoreVertical,
   ArrowRight,
   Search,
-  CircleX
+  CircleX,
+  Bolt,
+  SquareXIcon,
+  SquareChevronLeftIcon
 } from 'lucide-react';
 
 export const Icons = {
@@ -19,5 +22,8 @@ export const Icons = {
   more: MoreVertical,
   search: Search,
   next: ArrowRight,
-  circleX: CircleX
+  circleX: CircleX,
+  bolt: Bolt,
+  deleteX: SquareXIcon,
+  undo: SquareChevronLeftIcon
 };

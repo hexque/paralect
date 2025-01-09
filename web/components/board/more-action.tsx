@@ -31,8 +31,8 @@ export const BoardMoreAction = ({ id, onRowSelect }: BoardMoreActionProps) => {
   const handleClose = (modalName: string) => hideModal(modalName);
 
   const actions = [
-    { label: 'Update', onClick: () => showModal('dialog') },
-    { label: 'Delete', onClick: () => showModal('alertDialog') }
+    { icons: <Icons.bolt />, label: 'Update', onClick: () => showModal('dialog') },
+    { icons: <Icons.deleteX />, label: 'Delete', onClick: () => showModal('alertDialog') }
   ];
 
   return (
@@ -45,14 +45,18 @@ export const BoardMoreAction = ({ id, onRowSelect }: BoardMoreActionProps) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className='w-20' side='right'>
           <DropdownMenuGroup>
-            {actions.map((action, index) => (
-              <DropdownMenuItem key={index} onSelect={action.onClick}>
-                {action.label}
+            {actions.map(({ label, icons, onClick }) => (
+              <DropdownMenuItem key={label} onSelect={onClick}>
+                {icons}
+                <span>{label}</span>
               </DropdownMenuItem>
             ))}
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Undo</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Icons.undo />
+            Undo
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       {vacancy && (

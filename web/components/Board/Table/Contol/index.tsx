@@ -1,6 +1,6 @@
 'use client';
 
-import { TableCell } from '../ui/table';
+import { TableCell } from '@/components/ui/table';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,21 +9,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { Button } from '../ui/button';
-import { Icons } from '../ui/icons';
-import { BoardAlertDialog } from './alert-dialog';
-import { EditBoardForm } from './form';
+import { Button } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
+import { BoardAlertDialog } from '@/components/Board/AlertDialog';
+import { EditBoardForm } from '@/components/Board/Form';
 
 import { useVacancy } from '@/lib/queries';
 
 import { useModalManager } from '@/hooks/use-modal';
 
-type BoardMoreActionProps = {
+type TableContolProps = {
   id: string;
   onRowSelect: (id: string) => void;
 };
 
-export const BoardMoreAction = ({ id, onRowSelect }: BoardMoreActionProps) => {
+export const TableControl = ({ id, onRowSelect }: TableContolProps) => {
   const { vacancy } = useVacancy(id);
 
   const { isOpenModals, hideModal, showModal } = useModalManager();

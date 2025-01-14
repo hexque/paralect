@@ -2,10 +2,17 @@
 
 import { useState } from 'react';
 
-import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from '../ui/table';
-import { BoardMoreAction } from './more-action';
-import { TableNotFound } from './not-found';
-import { StatusBadge } from './status-badge';
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableCell
+} from '@/components/ui/table';
+import { TableControl } from './Contol';
+import { TableEmptyState } from './EmptyState';
+import { TableStatusBadge } from './StatusBadge';
 
 import { Vacancy } from '@/types';
 
@@ -27,7 +34,7 @@ export const BoardTable = ({ vacancies }: BoardTableProps) => {
           <TableHead className='min-w-[6rem] py-1'>Salary</TableHead>
           <TableHead className='min-w-[6rem] py-1'>Status</TableHead>
           <TableHead className='min-w-[20rem] py-1'>Note</TableHead>
-          <TableHead className='min-w-[3rem] py-1 text-center'>Actions</TableHead>
+          <TableHead className='min-w-[3rem] py-1 text-center'>Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className='min-h-96'>
@@ -38,16 +45,16 @@ export const BoardTable = ({ vacancies }: BoardTableProps) => {
               <TableCell>{position}</TableCell>
               <TableCell>${salaryFork}</TableCell>
               <TableCell>
-                <StatusBadge status={status} />
+                <TableStatusBadge status={status} />
               </TableCell>
               <TableCell>{note}</TableCell>
-              <BoardMoreAction id={selectedId} onRowSelect={handleRowClick} />
+              <TableControl id={selectedId} onRowSelect={handleRowClick} />
             </TableRow>
           ))
         ) : (
           <TableRow>
             <TableCell colSpan={6} className='h-96 text-center'>
-              <TableNotFound />
+              <TableEmptyState />
             </TableCell>
           </TableRow>
         )}

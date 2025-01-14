@@ -15,7 +15,7 @@ import {
 
 import { cn } from '@/lib/utils';
 
-interface TextareaProps<T extends FieldValues> {
+type TextareaProps<T extends FieldValues> = {
   control: Control<T>;
   name: Path<T>;
   label?: ReactNode;
@@ -29,7 +29,7 @@ interface TextareaProps<T extends FieldValues> {
     description?: string;
     message?: string;
   };
-}
+};
 
 export const TextareaControl = <T extends FieldValues>({
   control,

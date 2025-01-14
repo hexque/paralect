@@ -4,14 +4,15 @@ import { useState } from 'react';
 
 import { Button } from '../ui/button';
 import { Icons } from '../ui/icons';
-import { CreateBoardForm } from './form';
-import { BoardTable } from './table';
-import { BoardSearch } from './search';
-import { Spinner } from '../shared/spinner';
+import { CreateBoardForm } from './Form';
+import { BoardTable } from './Table';
+import { Search } from '../shared/Search';
+import { Spinner } from '../shared/Spinner';
 
 import { useVacancies } from '@/lib/queries';
 
 import { Vacancy } from '@/types';
+
 export function Board() {
   const { vacancies, isLoading } = useVacancies();
 
@@ -28,7 +29,7 @@ export function Board() {
       <div className='mb-4 flex items-center justify-between rounded-md bg-zinc-900 px-4 py-3 max-sm:flex-col max-sm:items-start'>
         <h3 className='max-sm:mb-3 max-sm:hidden'>JooBoard</h3>
         <div className='flex max-sm:w-full max-sm:justify-between'>
-          <BoardSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
           <CreateBoardForm>
             <Button
               size='icon'

@@ -1,8 +1,8 @@
-import { Button } from '../ui/button';
-import { Icons } from '../ui/icons';
-import { CreateBoardForm } from './form';
+import { Button } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
+import { CreateBoardForm } from '@/components/Board/Form';
 
-export const TableNotFound = () => {
+export const TableEmptyState = () => {
   const handleRefresh = () => window.location.reload();
 
   return (

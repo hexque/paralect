@@ -4,7 +4,6 @@
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 
 import {
   Dialog,
@@ -15,67 +14,18 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog';
-import { Icons } from '../ui/icons';
-import { Button } from '../ui/button';
-import { InputControl } from '../shared/form/input';
-import { TextareaControl } from '../shared/form/textarea';
-import { SelectControl } from '../shared/form/select';
+import { Icons } from '@/components/ui/icons';
+import { Button } from '@/components/ui/button';
+import { TextareaControl } from '@/components/shared/FormControl/Textarea';
+import { TextInputControl } from '@/components/shared/FormControl/TextInput';
+import { SelectControl } from '@/components/shared/FormControl/Select';
 
 import { STATUSES } from '@/lib/constants';
 import { useCreate, useUpdate } from '@/lib/queries';
-import { isValidRange } from '@/lib/utils';
 
-export const CreateVacancyResponseSchema = z.object({
-  company: z
-    .string({
-      required_error: 'Company is required',
-      invalid_type_error: 'Company is required'
-    })
-    .trim()
-    .min(1, {
-      message: 'Company is required'
-    })
-    .max(50, {
-      message: 'Company is too long'
-    }),
-  position: z
-    .string({
-      required_error: 'Position is required',
-      invalid_type_error: 'Position is required'
-    })
-    .trim()
-    .min(1, {
-      message: 'Position is required'
-    })
-    .max(80, {
-      message: 'Position is too long'
-    }),
-  salaryFork: z
-    .string({
-      required_error: 'Salary fork is required',
-      invalid_type_error: 'Salary fork is required'
-    })
-    .trim()
-    .min(1, {
-      message: 'Salary fork is required'
-    })
-    .refine((value) => /^(\d+|\d+-\d+)$/.test(value), {
-      message: 'Invalid salary fork format. Should be a number or a range (e.g., 100-200).'
-    })
-    .refine((value) => isValidRange(value), {
-      message: 'The range must be written in ascending order (e.g., 500-700).'
-    }),
-  status: z
-    .enum(['Applied', 'Invitation', 'Rejected', 'Archived'], {
-      required_error: 'Please choose one of the following statuses'
-    })
-    .refine((value: string) => value !== undefined, {
-      message: 'Please choose one of the following statuses'
-    }),
-  note: z.string().trim().optional()
-});
+import { validationSchema } from './schema';
 
-type FormData = z.infer<typeof CreateVacancyResponseSchema>;
+import { FormData } from './types';
 
 export const Form = ({
   props,
@@ -94,16 +44,16 @@ export const Form = ({
     <FormProvider {...form}>
       <form className='mt-5 grid gap-2' onSubmit={handleSubmit(onSubmit)}>
         <div className='grid items-center'>
-          <InputControl control={control} label='Company' name='company' />
+          <TextInputControl control={control} label='Company' name='company' />
         </div>
         <div className='grid items-center'>
-          <InputControl control={control} label='Position' name='position' />
+          <TextInputControl control={control} label='Position' name='position' />
         </div>
         <div className='grid items-center'>
-          <InputControl
+          <TextInputControl
             control={control}
-            label='Salary fork'
-            name='salaryFork'
+            label='Salary range'
+            name='salary'
             classNames={{ input: 'peer pe-12 ps-6' }}
             startAddOn='$'
             endAddOn='USD'
@@ -154,7 +104,7 @@ export const CreateBoardForm = ({ children }: { children: React.ReactNode }) => 
         </DialogHeader>
         <Form
           props={{
-            resolver: zodResolver(CreateVacancyResponseSchema)
+            resolver: zodResolver(validationSchema)
           }}
           onSubmit={handleSubmit}
         >
@@ -210,7 +160,7 @@ export const EditBoardForm = ({
         </DialogHeader>
         <Form
           props={{
-            resolver: zodResolver(CreateVacancyResponseSchema),
+            resolver: zodResolver(validationSchema),
             defaultValues: {
               company: vacancy?.company,
               position: vacancy?.position,

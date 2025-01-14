@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 
-interface SpinnerProps {
+type SpinnerProps = {
   spinnerClassNames?: string;
   variant?: 'screen' | 'container';
-}
+};
 
 export const Spinner = ({ spinnerClassNames, variant }: SpinnerProps) => (
   <div

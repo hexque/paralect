@@ -3,13 +3,15 @@
 import { useRef } from 'react';
 
 import { Input } from '@/components/ui/input';
-import { Icons } from '@/components//ui/icons';
+import { Icons } from '@/components/ui/icons';
 
-interface BoardSearchProps {
+type SearchProps = {
   searchQuery: string;
+  placeholder?: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-}
-export const BoardSearch = ({ searchQuery, setSearchQuery }: BoardSearchProps) => {
+};
+
+export const Search = ({ searchQuery, placeholder = 'Search', setSearchQuery }: SearchProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClearInput = () => {
@@ -23,7 +25,7 @@ export const BoardSearch = ({ searchQuery, setSearchQuery }: BoardSearchProps) =
       <div className='relative'>
         <Input
           className='peer pe-9 ps-9 max-md:text-xs'
-          placeholder='Search by company...'
+          placeholder={placeholder}
           type='text'
           ref={inputRef}
           value={searchQuery}

@@ -49,7 +49,7 @@ export const useCreate = () => {
     mutationFn: async (formData: FormData) => await api.post('/vacancies', formData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['search-vacancies'] });
-      toast.success('The response to the vacancy was successfully added');
+      toast.success('Your response was successfully added!');
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -67,7 +67,7 @@ export const useUpdate = (id: string) => {
     mutationFn: async (formData: FormData) => await api.patch('/vacancies' + `/${id}`, formData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['search-vacancies'] });
-      toast.success('The response to the vacancy was successfully updated');
+      toast.success('Your response was successfully updated!');
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -85,7 +85,7 @@ export const useDelete = () => {
     mutationFn: async (id: string) => await api.delete('/vacancies' + `/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['search-vacancies'] });
-      toast.success('The response to the vacancy has been successfully deleted');
+      toast.success('Your response was successfully deleted!');
     },
     onError: (error: Error) => {
       toast.error(error.message);
